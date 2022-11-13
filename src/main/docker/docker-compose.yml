@@ -1,0 +1,23 @@
+version: '1'
+services:
+  meetup:
+    image: 'meetup:latest'
+    build:
+      context: .
+    ports:
+      - 8085:8085
+    container_name: meetup-api
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/meetupApi
+      - SPRING_DATASOURCE_USERNAME=
+      - SPRING_DATASOURCE_PASSWORD=
+
+  db:
+    image: 'postgres:latest'
+    container_name: db
+    environment:
+      - POSTGRES_USER=
+      - POSTGRES_PASSWORD=
+      - POSTGRES_DB=meetupApi
